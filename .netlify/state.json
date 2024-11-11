@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Tokyo",
+			"country": {
+				"code": "JP",
+				"name": "Japan"
+			},
+			"subdivision": {
+				"code": "13",
+				"name": "Tokyo"
+			},
+			"timezone": "Asia/Tokyo",
+			"latitude": 35.6837,
+			"longitude": 139.6805,
+			"postalCode": "151-0071"
+		},
+		"timestamp": 1731287573526
+	}
+}
