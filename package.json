@@ -7,7 +7,9 @@
     "serve": "netlify functions:serve",
     "start": "netlify dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vite": "^5.4.11"
+  },
   "devDependencies": {
     "netlify-cli": "^17.8.1"
   }
