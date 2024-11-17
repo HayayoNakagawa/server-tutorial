@@ -1,40 +1,48 @@
 import { useState } from "react";
 
 export default function App() {
-  const [story, setStory] = useState(""); // ストーリー表示用
-  const [inputName, setInputName] = useState(""); // 入力された名前
-  const [unitSystem, setUnitSystem] = useState("us"); // USまたはEUの単位選択
+  const [name, setName] = useState('');
+  const [unitSystem, setUnitSystem] = useState('us');
+  const [story, setStory] = useState('');
 
-  // サーバーからデータを取得する関数
-  const generateStory = async () => {
-    const name = inputName.trim() === "" ? "Bob" : inputName; // 名前が空ならBobを使用
+  async function generateStory(event) {
+    event.preventDefault();
 
-    try {
-      const response = await fetch(
-        `/netlify/functions/randomStory?name=${encodeURIComponent(name)}&unitSystem=${unitSystem}`
-      );
-      if (!response.ok) throw new Error("Failed to fetch story.");
+    const inputName = name.trim() || 'Bob';
+
+    const response = await fetch(
+      `/.netlify/functions/silly_story?name=${encodeURIComponent(inputName)}&unitSystem=${unitSystem}`
+    );
+
+    if (response.ok) {
       const data = await response.json();
-      setStory(data.story); // ストーリーのみ表示
-    } catch (error) {
-      console.error("Error generating story:", error);
-      setStory("An error occurred while generating the story.");
+      setStory(data.message);
+    } else {
+      setStory('Error generating story');
     }
-  };
+  }
+
+  function handleNameChange(event) {
+    setName(event.target.value);
+  }
+
+  function handleUnitChange(event) {
+    setUnitSystem(event.target.value);
+  }
 
   return (
     <div>
-      {/* 名前入力フィールド */}
       <div>
         <label htmlFor="customname">Enter custom name:</label>
         <input
           type="text"
-          placeholder="Enter name here"
-          onChange={(event) => setInputName(event.target.value)}
+          id="customname"
+          value={name}
+          onChange={handleNameChange}
+          placeholder=""
         />
       </div>
 
-      {/* 単位選択ラジオボタン */}
       <div>
         <label htmlFor="us">US</label>
         <input
@@ -42,25 +50,36 @@ export default function App() {
           id="us"
           value="us"
           checked={unitSystem === "us"}
-          onChange={() => setUnitSystem("us")}
+          onChange={handleUnitChange}
         />
-        <label htmlFor="eu">EU</label>
+        <label htmlFor="uk">UK</label>
         <input
           type="radio"
-          id="eu"
+          id="uk"
           value="uk"
           checked={unitSystem === "uk"}
-          onChange={() => setUnitSystem("uk")}
+          onChange={handleUnitChange}
         />
       </div>
 
-      {/* ストーリー生成ボタン */}
       <div>
         <button onClick={generateStory}>Generate random story</button>
       </div>
 
-      {/* 生成されたストーリー表示 */}
-      {story && <p>{story}</p>}
+      <div>
+        <p
+          id="storyOutput"
+          style={{
+            whiteSpace: "pre-wrap",
+            marginTop: "20px",
+            border: "1px solid #ccc",
+            padding: "10px",
+            display: story ? "block" : "none",
+          }}
+        >
+          {story}
+        </p>
+      </div>
     </div>
   );
 }
