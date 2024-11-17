@@ -1,8 +1,7 @@
-export default async (req) => {
+export async function handler(event) {
     // クエリパラメータを取得
-    const url = new URL(req.url);
-    const name = url.searchParams.get('name') || 'Bob';
-    const unitSystem = url.searchParams.get('unitSystem') || 'us';
+    const name = event.queryStringParameters?.name || "Bob";
+    const unitSystem = event.queryStringParameters?.unitSystem || "us";
   
     // ストーリー生成用のデータ
     const xItems = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
@@ -14,7 +13,8 @@ export default async (req) => {
     ];
   
     // ランダムな選択を生成
-    const randomValueFromArray = (array) => array[Math.floor(Math.random() * array.length)];
+    const randomValueFromArray = (array) =>
+      array[Math.floor(Math.random() * array.length)];
     const xItem = randomValueFromArray(xItems);
     const yItem = randomValueFromArray(yItems);
     const zItem = randomValueFromArray(zItems);
@@ -38,8 +38,9 @@ export default async (req) => {
     const story = `It was ${temperature} ${tempType} outside, so ${xItem} went for a walk. When they got to ${yItem}, they stared in horror for a few moments, then ${zItem}. ${name} saw the whole thing, but was not surprised — ${xItem} weighs ${weight} ${weightType}, and it was a hot day.`;
   
     // JSON形式で返す
-    return new Response(JSON.stringify({ message: story }), {
-      headers: { "Content-Type": "application/json" },
-    });
-  };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: story }),
+    };
+  }
   
