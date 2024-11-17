@@ -1,0 +1,46 @@
+
+import {createRequire as ___nfyCreateRequire} from "module";
+import {fileURLToPath as ___nfyFileURLToPath} from "url";
+import {dirname as ___nfyPathDirname} from "path";
+let __filename=___nfyFileURLToPath(import.meta.url);
+let __dirname=___nfyPathDirname(___nfyFileURLToPath(import.meta.url));
+let require=___nfyCreateRequire(import.meta.url);
+
+
+// netlify/functions/index.mjs
+var functions_default = async (req) => {
+  const xItems = ["Willy the Goblin", "Big Daddy", "Father Christmas"];
+  const yItems = ["the soup kitchen", "Disneyland", "the White House"];
+  const zItems = [
+    "spontaneously combusted",
+    "melted into a puddle on the sidewalk",
+    "turned into a slug and crawled away"
+  ];
+  const { name = "Bob", unitSystem = "us" } = req.query || {};
+  const randomValueFromArray = (array) => array[Math.floor(Math.random() * array.length)];
+  const xItem = randomValueFromArray(xItems);
+  const yItem = randomValueFromArray(yItems);
+  const zItem = randomValueFromArray(zItems);
+  const initialTemperature = 94;
+  const initialWeight = 300;
+  let temperature = initialTemperature;
+  let weight = initialWeight;
+  let tempType = "fahrenheit";
+  let weightType = "pounds";
+  if (unitSystem === "uk") {
+    temperature = Math.round((initialTemperature - 32) * (5 / 9));
+    weight = Math.round(initialWeight / 14);
+    tempType = "celsius";
+    weightType = "stone";
+  }
+  const story = `It was ${temperature} ${tempType} outside, so ${xItem} went for a walk. When they got to ${yItem}, they stared in horror for a few moments, then ${zItem}. ${name} saw the whole thing, but was not surprised \u2014 ${xItem} weighs ${weight} ${weightType}, and it was a hot day.`;
+  const response = {
+    story,
+    details: { temperature, tempType, weight, weightType, xItem, yItem, zItem, name }
+  };
+  return new Response(JSON.stringify(response), { headers: { "Content-Type": "application/json" } });
+};
+export {
+  functions_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsibmV0bGlmeS9mdW5jdGlvbnMvaW5kZXgubWpzIl0sCiAgInNvdXJjZXNDb250ZW50IjogWyJleHBvcnQgZGVmYXVsdCBhc3luYyAocmVxKSA9PiB7XHJcbiAgICAvLyBcdTMwRTlcdTMwRjNcdTMwQzBcdTMwRTBcdTg5ODFcdTdEMjBcdTMwNkVcdTVCOUFcdTdGQTlcclxuICAgIGNvbnN0IHhJdGVtcyA9IFtcIldpbGx5IHRoZSBHb2JsaW5cIiwgXCJCaWcgRGFkZHlcIiwgXCJGYXRoZXIgQ2hyaXN0bWFzXCJdO1xyXG4gICAgY29uc3QgeUl0ZW1zID0gW1widGhlIHNvdXAga2l0Y2hlblwiLCBcIkRpc25leWxhbmRcIiwgXCJ0aGUgV2hpdGUgSG91c2VcIl07XHJcbiAgICBjb25zdCB6SXRlbXMgPSBbXHJcbiAgICAgIFwic3BvbnRhbmVvdXNseSBjb21idXN0ZWRcIixcclxuICAgICAgXCJtZWx0ZWQgaW50byBhIHB1ZGRsZSBvbiB0aGUgc2lkZXdhbGtcIixcclxuICAgICAgXCJ0dXJuZWQgaW50byBhIHNsdWcgYW5kIGNyYXdsZWQgYXdheVwiXHJcbiAgICBdO1xyXG4gIFxyXG4gICAgLy8gXHUzMEU2XHUzMEZDXHUzMEI2XHUzMEZDXHU2MzA3XHU1QjlBXHUzMDZFXHU1NDBEXHU1MjREXHUzMDY4XHU1MzU4XHU0RjREXHUzMEI3XHUzMEI5XHUzMEM2XHUzMEUwXHUzMDkyXHU1M0Q2XHU1Rjk3XHJcbiAgICBjb25zdCB7IG5hbWUgPSBcIkJvYlwiLCB1bml0U3lzdGVtID0gXCJ1c1wiIH0gPSByZXEucXVlcnkgfHwge307XHJcbiAgXHJcbiAgICAvLyBcdTMwRTlcdTMwRjNcdTMwQzBcdTMwRTBcdTg5ODFcdTdEMjBcdTMwOTJcdTkwNzhcdTYyOUVcclxuICAgIGNvbnN0IHJhbmRvbVZhbHVlRnJvbUFycmF5ID0gKGFycmF5KSA9PlxyXG4gICAgICBhcnJheVtNYXRoLmZsb29yKE1hdGgucmFuZG9tKCkgKiBhcnJheS5sZW5ndGgpXTtcclxuICAgIGNvbnN0IHhJdGVtID0gcmFuZG9tVmFsdWVGcm9tQXJyYXkoeEl0ZW1zKTtcclxuICAgIGNvbnN0IHlJdGVtID0gcmFuZG9tVmFsdWVGcm9tQXJyYXkoeUl0ZW1zKTtcclxuICAgIGNvbnN0IHpJdGVtID0gcmFuZG9tVmFsdWVGcm9tQXJyYXkoekl0ZW1zKTtcclxuICBcclxuICAgIC8vIFx1NkUyOVx1NUVBNlx1MzA2OFx1NEY1M1x1OTFDRFx1OEEwOFx1N0I5N1xyXG4gICAgY29uc3QgaW5pdGlhbFRlbXBlcmF0dXJlID0gOTQ7IC8vIFx1ODNFRlx1NkMwRlxyXG4gICAgY29uc3QgaW5pdGlhbFdlaWdodCA9IDMwMDsgLy8gXHUzMEREXHUzMEYzXHUzMEM5XHJcbiAgICBsZXQgdGVtcGVyYXR1cmUgPSBpbml0aWFsVGVtcGVyYXR1cmU7XHJcbiAgICBsZXQgd2VpZ2h0ID0gaW5pdGlhbFdlaWdodDtcclxuICAgIGxldCB0ZW1wVHlwZSA9IFwiZmFocmVuaGVpdFwiO1xyXG4gICAgbGV0IHdlaWdodFR5cGUgPSBcInBvdW5kc1wiO1xyXG4gIFxyXG4gICAgaWYgKHVuaXRTeXN0ZW0gPT09IFwidWtcIikge1xyXG4gICAgICB0ZW1wZXJhdHVyZSA9IE1hdGgucm91bmQoKGluaXRpYWxUZW1wZXJhdHVyZSAtIDMyKSAqICg1IC8gOSkpOyAvLyBcdTgzRUZcdTZDMEZcdTIxOTJcdTY0NDJcdTZDMEZcclxuICAgICAgd2VpZ2h0ID0gTWF0aC5yb3VuZChpbml0aWFsV2VpZ2h0IC8gMTQpOyAvLyBcdTMwRERcdTMwRjNcdTMwQzlcdTIxOTJcdTMwQjlcdTMwQzhcdTMwRkNcdTMwRjNcclxuICAgICAgdGVtcFR5cGUgPSBcImNlbHNpdXNcIjtcclxuICAgICAgd2VpZ2h0VHlwZSA9IFwic3RvbmVcIjtcclxuICAgIH1cclxuICBcclxuICAgIGNvbnN0IHN0b3J5ID0gYEl0IHdhcyAke3RlbXBlcmF0dXJlfSAke3RlbXBUeXBlfSBvdXRzaWRlLCBzbyAke3hJdGVtfSB3ZW50IGZvciBhIHdhbGsuIFdoZW4gdGhleSBnb3QgdG8gJHt5SXRlbX0sIHRoZXkgc3RhcmVkIGluIGhvcnJvciBmb3IgYSBmZXcgbW9tZW50cywgdGhlbiAke3pJdGVtfS4gJHtuYW1lfSBzYXcgdGhlIHdob2xlIHRoaW5nLCBidXQgd2FzIG5vdCBzdXJwcmlzZWQgXHUyMDE0ICR7eEl0ZW19IHdlaWdocyAke3dlaWdodH0gJHt3ZWlnaHRUeXBlfSwgYW5kIGl0IHdhcyBhIGhvdCBkYXkuYDtcclxuICBcclxuICAgIGNvbnN0IHJlc3BvbnNlID0ge1xyXG4gICAgICBzdG9yeSxcclxuICAgICAgZGV0YWlsczogeyB0ZW1wZXJhdHVyZSwgdGVtcFR5cGUsIHdlaWdodCwgd2VpZ2h0VHlwZSwgeEl0ZW0sIHlJdGVtLCB6SXRlbSwgbmFtZSB9XHJcbiAgICB9O1xyXG4gIFxyXG4gICAgcmV0dXJuIG5ldyBSZXNwb25zZShKU09OLnN0cmluZ2lmeShyZXNwb25zZSksIHsgaGVhZGVyczogeyBcIkNvbnRlbnQtVHlwZVwiOiBcImFwcGxpY2F0aW9uL2pzb25cIiB9IH0pO1xyXG4gIH07XHJcbiAgIl0sCiAgIm1hcHBpbmdzIjogIjs7Ozs7Ozs7OztBQUFBLElBQU8sb0JBQVEsT0FBTyxRQUFRO0FBRTFCLFFBQU0sU0FBUyxDQUFDLG9CQUFvQixhQUFhLGtCQUFrQjtBQUNuRSxRQUFNLFNBQVMsQ0FBQyxvQkFBb0IsY0FBYyxpQkFBaUI7QUFDbkUsUUFBTSxTQUFTO0FBQUEsSUFDYjtBQUFBLElBQ0E7QUFBQSxJQUNBO0FBQUEsRUFDRjtBQUdBLFFBQU0sRUFBRSxPQUFPLE9BQU8sYUFBYSxLQUFLLElBQUksSUFBSSxTQUFTLENBQUM7QUFHMUQsUUFBTSx1QkFBdUIsQ0FBQyxVQUM1QixNQUFNLEtBQUssTUFBTSxLQUFLLE9BQU8sSUFBSSxNQUFNLE1BQU0sQ0FBQztBQUNoRCxRQUFNLFFBQVEscUJBQXFCLE1BQU07QUFDekMsUUFBTSxRQUFRLHFCQUFxQixNQUFNO0FBQ3pDLFFBQU0sUUFBUSxxQkFBcUIsTUFBTTtBQUd6QyxRQUFNLHFCQUFxQjtBQUMzQixRQUFNLGdCQUFnQjtBQUN0QixNQUFJLGNBQWM7QUFDbEIsTUFBSSxTQUFTO0FBQ2IsTUFBSSxXQUFXO0FBQ2YsTUFBSSxhQUFhO0FBRWpCLE1BQUksZUFBZSxNQUFNO0FBQ3ZCLGtCQUFjLEtBQUssT0FBTyxxQkFBcUIsT0FBTyxJQUFJLEVBQUU7QUFDNUQsYUFBUyxLQUFLLE1BQU0sZ0JBQWdCLEVBQUU7QUFDdEMsZUFBVztBQUNYLGlCQUFhO0FBQUEsRUFDZjtBQUVBLFFBQU0sUUFBUSxVQUFVLFdBQVcsSUFBSSxRQUFRLGdCQUFnQixLQUFLLHNDQUFzQyxLQUFLLG1EQUFtRCxLQUFLLEtBQUssSUFBSSxzREFBaUQsS0FBSyxXQUFXLE1BQU0sSUFBSSxVQUFVO0FBRXJRLFFBQU0sV0FBVztBQUFBLElBQ2Y7QUFBQSxJQUNBLFNBQVMsRUFBRSxhQUFhLFVBQVUsUUFBUSxZQUFZLE9BQU8sT0FBTyxPQUFPLEtBQUs7QUFBQSxFQUNsRjtBQUVBLFNBQU8sSUFBSSxTQUFTLEtBQUssVUFBVSxRQUFRLEdBQUcsRUFBRSxTQUFTLEVBQUUsZ0JBQWdCLG1CQUFtQixFQUFFLENBQUM7QUFDbkc7IiwKICAibmFtZXMiOiBbXQp9Cg==
