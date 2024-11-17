@@ -1,24 +1,14 @@
 {
   "name": "server-tutorial",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server-side application for generating random stories",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
-    "netlify-serve": "netlify functions:serve"
+    "serve": "netlify functions:serve",
+    "start": "netlify dev"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "netlify-cli": "^17.8.1",
-    "vite": "^4.0.0",
-    "@vitejs/plugin-react": "^4.0.0"
+    "netlify-cli": "^17.8.1"
   }
 }
